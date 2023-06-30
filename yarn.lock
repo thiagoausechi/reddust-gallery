@@ -1990,6 +1990,11 @@ prelude-ls@^1.2.1:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
+prettier-plugin-tailwind-styled-components@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwind-styled-components/-/prettier-plugin-tailwind-styled-components-0.0.2.tgz#7fe96898fff1a6e8ddff4d5924fcc9e8f348d264"
+  integrity sha512-D1BaKEikNzWRPZhqAetVCArvTbU0676R4yGYkghLjRDfuHzj2O917dw+uYrKqG1bwGlmvEr7XMAKVbmFbsv+Yg==
+
 prettier-plugin-tailwindcss@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.3.0.tgz#8299b307c7f6467f52732265579ed9375be6c818"
