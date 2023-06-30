@@ -1,3 +1,5 @@
+import HeroSection from '@/containers/hero-section'
+
 export default function Home() {
-  return null
+  return <HeroSection />
 }
