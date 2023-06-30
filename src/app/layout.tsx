@@ -1,3 +1,4 @@
+import Header from '@/layout/header'
 import { Metadata } from 'next'
 import './globals.css'
 
@@ -34,7 +35,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        <Header />
+        <main>{children}</main>
+      </body>
     </html>
   )
 }
