@@ -1,18 +1,18 @@
-import { Feature } from '@/lib/debug'
+import { Feature } from '@/services/hygraph'
 import Image from 'next/image'
 import Link from 'next/link'
 import tw from 'tailwind-styled-components'
 import CoverPlaceholder from '/public/images/feature_cover_placeholder.png'
 
 export default function FeatureCard({
-  status,
   name,
-  slug,
   description,
+  slug,
   cover,
-  modification,
+  featureStatus,
+  compatibility,
+  modificationType,
   tags,
-  compability,
 }: Feature) {
   return (
     <Wrapper>
@@ -22,7 +22,7 @@ export default function FeatureCard({
           <CoverWrapper>
             <CoverImage>
               <Image
-                src={cover || CoverPlaceholder}
+                src={cover.url || CoverPlaceholder}
                 alt={`${name} cover`}
                 className='object-cover'
                 fill
@@ -32,18 +32,22 @@ export default function FeatureCard({
             <TagsWrapper>
               <TagsContent>
                 {tags.slice(0, 3).map((tag) => (
-                  <Tag key={tag}>
+                  <Tag key={tag.slug}>
                     <TagIcon />
-                    {tag}
+                    {tag.name}
                   </Tag>
                 ))}
               </TagsContent>
             </TagsWrapper>
 
-            {status === 'added' ? (
-              <Badge color={BadgeColor[compability]}>{compability}</Badge>
+            {featureStatus.slug === 'implemented' ? (
+              <Badge color={compatibility.badgeColor}>
+                {compatibility.name}
+              </Badge>
             ) : (
-              <Badge color={BadgeColor[status]}>{status}</Badge>
+              <Badge color={featureStatus.badgeColor}>
+                {featureStatus.name}
+              </Badge>
             )}
           </CoverWrapper>
 
@@ -54,7 +58,7 @@ export default function FeatureCard({
 
           <Footer>
             <ModificationIcon />
-            <ModificationLabel>{modification}</ModificationLabel>
+            <ModificationLabel>{modificationType.name}</ModificationLabel>
           </Footer>
         </Content>
       </LinkWrapper>
@@ -81,12 +85,4 @@ const Footer            = tw.footer`relative mt-8 flex items-center` // prettier
 const ModificationIcon  = tw.div`rounded-full w-6 h-6 md:w-8 md:h-8 bg-gray-200` // prettier-ignore
 const ModificationLabel = tw.p`ml-2 text-neutral-50 line-clamp-1` // prettier-ignore
 
-const Badge = tw.span<{ color?: string }>` absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg px-3 py-2 text-sm font-medium text-white ${(p) => p.color || 'bg-red-500'}` // prettier-ignore
-
-// TODO: Temporary
-const BadgeColor = {
-  vanilla: 'bg-green-500',
-  optfine: 'bg-yellow-500',
-  planned: 'bg-neutral-500',
-  deprecated: 'bg-red-500',
-}
+const Badge = tw.span<{ color?: string }>` absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg px-3 py-2 text-sm font-medium text-white ${(p) => 'bg-'+p.color || 'bg-red-500'}` // prettier-ignore

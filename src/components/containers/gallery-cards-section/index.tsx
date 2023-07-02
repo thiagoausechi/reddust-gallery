@@ -1,30 +1,22 @@
 import FeatureCard from '@/layout/feature-card'
 import SectionContent from '@/layout/section-content'
-import { FEATURES } from '@/lib/debug'
+import { getFeatures } from '@/services/hygraph'
 import tw from 'tailwind-styled-components'
 import TilesBackground from '/public/images/tiles_background.png'
 
-/**
- * TODO: Implement the GraphQL query here
- */
+export default async function GalleryCardsSection() {
+  const features = await getFeatures()
 
-export default function GalleryCardsSection() {
   return (
     <Wrapper style={{ background }}>
       <CardsList>
-        <FeatureCard {...FEATURES.get('extremely-specific-case')!} />
+        {features.map((feature) => (
+          <FeatureCard key={feature.slug} {...feature} />
+        ))}
       </CardsList>
     </Wrapper>
   )
 }
-
-/*
-const generateCards = () => {
-  const cards: Feature[] = []
-  FEATURES.forEach((feature) => cards.push(feature))
-
-  return cards.map((feature) => <FeatureCard key={feature.name} {...feature} />)
-}*/
 
 /**
  * I'd love to this with Tailwind, but I couldn't find any good way.
