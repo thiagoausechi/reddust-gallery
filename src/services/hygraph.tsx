@@ -8,9 +8,6 @@ export type Feature = {
   name: string
   description: string
   slug: string
-  cover: {
-    url: string
-  }
   featureStatus: {
     slug: string
     name: string
@@ -32,14 +29,8 @@ export type Feature = {
     description: string
   }[]
   comparisons: {
-    description?: string
-    title?: string
-    before: {
-      url: string
-    }
-    after: {
-      url: string
-    }
+    description: string | null
+    title: string | null
   }[]
   credit: {
     author: string
@@ -65,19 +56,10 @@ export const getFeatures = async (): Promise<Feature[]> => {
       featuresConnection {
         edges {
           node {
-            cover {
-              url
-            }
             description
             comparisons {
               description
               title
-              before {
-                url
-              }
-              after {
-                url
-              }
             }
             compatibility {
               name
@@ -125,19 +107,10 @@ export const getFeature = async (slug: string): Promise<Feature> => {
     parse(gql`
       query FeaturePageQuery($slug: String!) {
         feature(where: { slug: $slug }) {
-          cover {
-            url
-          }
           description
           comparisons {
             description
             title
-            before {
-              url
-            }
-            after {
-              url
-            }
           }
           compatibility {
             name
