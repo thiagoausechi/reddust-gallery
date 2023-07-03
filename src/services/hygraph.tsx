@@ -2,7 +2,7 @@ import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 import { parse } from 'graphql'
 import { gql, request } from 'graphql-request'
 
-const hygraph = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!
+const hygraph = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT as string
 
 export type Feature = {
   name: string
@@ -22,6 +22,8 @@ export type Feature = {
     name: string
     slug: string
     description: string
+    iconX: number
+    iconY: number
   }
   tags: {
     slug: string
@@ -82,6 +84,8 @@ export const getFeatures = async (): Promise<Feature[]> => {
               name
               slug
               description
+              iconX
+              iconY
             }
             tags {
               slug
@@ -133,6 +137,8 @@ export const getFeature = async (slug: string): Promise<Feature> => {
             name
             slug
             description
+            iconX
+            iconY
           }
           tags {
             slug
