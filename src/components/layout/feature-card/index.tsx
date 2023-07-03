@@ -67,7 +67,7 @@ export default function FeatureCard({
 
 const Wrapper             = tw.article`relative mx-auto w-full` // prettier-ignore
 const LinkWrapper         = tw(Link)`relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full` // prettier-ignore
-const Content             = tw.div`shadow p-4 rounded-lg bg-neutral-800` // prettier-ignore
+const Content             = tw.div`bg-gui p-4 shadow-gui` // prettier-ignore
 
 const ThumbnailWrapper    = tw.div`flex justify-center rounded-md relative overflow-hidden h-52` // prettier-ignore
 const ThumbnailImage      = tw.div`transition-transform duration-500 transform ease-in-out hover:scale-110 w-full` // prettier-ignore
@@ -94,6 +94,5 @@ const getIconPosition = ({
   iconY: number
 }): CSSProperties => ({
   backgroundPosition: `-${iconX * 32}px -${iconY * 32}px`,
-  // Tailwind don't have support for the imageRendering attribute
   imageRendering: 'pixelated',
 })
