@@ -18,7 +18,6 @@ module.exports = {
       },
       colors: {
         gui: {
-          DEFAULT: GUI_BACKGROUND,
           400: GUI_LIGHT,
           500: GUI_BACKGROUND,
           900: GUI_SHADOW,

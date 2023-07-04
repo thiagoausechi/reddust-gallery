@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { CSSProperties } from 'react'
 import tw from 'tailwind-styled-components'
+import GuiPanel from '../gui-panel'
 
 export default function FeatureCard({
   name,
@@ -17,7 +18,7 @@ export default function FeatureCard({
     <Wrapper>
       {/* TODO: Not implemented yet resulting in a 404 page. */}
       <LinkWrapper href={`/feature/${slug}`}>
-        <Content>
+        <GuiPanel>
           <ThumbnailWrapper>
             <ThumbnailImage>
               <Image
@@ -31,10 +32,7 @@ export default function FeatureCard({
             <TagsWrapper>
               <TagsContent>
                 {tags.slice(0, 3).map((tag) => (
-                  <Tag key={tag.slug}>
-                    <TagIcon />
-                    {tag.name}
-                  </Tag>
+                  <Tag key={tag.slug}>{tag.name}</Tag>
                 ))}
               </TagsContent>
             </TagsWrapper>
@@ -59,7 +57,7 @@ export default function FeatureCard({
             <ModificationIcon style={getIconPosition(modificationType)} />
             <ModificationLabel>{modificationType.name}</ModificationLabel>
           </ModificationWrapper>
-        </Content>
+        </GuiPanel>
       </LinkWrapper>
     </Wrapper>
   )
@@ -67,20 +65,18 @@ export default function FeatureCard({
 
 const Wrapper             = tw.article`relative mx-auto w-full` // prettier-ignore
 const LinkWrapper         = tw(Link)`relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full` // prettier-ignore
-const Content             = tw.div`bg-gui p-4 shadow-gui` // prettier-ignore
 
 const ThumbnailWrapper    = tw.div`flex justify-center rounded-md relative overflow-hidden h-52` // prettier-ignore
 const ThumbnailImage      = tw.div`transition-transform duration-500 transform ease-in-out hover:scale-110 w-full` // prettier-ignore
 
 const TagsWrapper         = tw.div`absolute flex justify-center bottom-0 mb-3` // prettier-ignore
-const TagsContent         = tw.div`flex bg-neutral-800 white px-4 py-1 space-x-5 rounded-lg overflow-hidden shadow` // prettier-ignore
+const TagsContent         = tw.div`flex bg-gui-500 white px-4 py-1 space-x-5 rounded-lg overflow-hidden` // prettier-ignore
 const Tag                 = tw.p`flex items-center font-medium text-neutral-50` // prettier-ignore
-const TagIcon             = tw.div`w-5 h-5 fill-current rounded-full mr-2 bg-neutral-200` // prettier-ignore
 
 const NameLabel           = tw.h2`font-medium text-base md:text-lg text-neutral-50 line-clamp-1` // prettier-ignore
 const DescriptionLabel    = tw.h2`mt-2 text-sm text-neutral-50 line-clamp-1` // prettier-ignore
 
-const ModificationWrapper = tw.footer`relative mt-8 flex w-fit items-center rounded pr-2 transition-colors duration-300 ease-in-out hover:bg-neutral-700` // prettier-ignore
+const ModificationWrapper = tw.footer`relative mt-8 flex w-fit items-center rounded pr-2 transition-colors duration-300 ease-in-out hover:bg-gui-400` // prettier-ignore
 const ModificationIcon    = tw.div`w-8 h-8 inline-block align-text-top bg-no-repeat bg-[url("/images/modifications_sprite.png")]` // prettier-ignore
 const ModificationLabel   = tw.p`ml-2 text-neutral-50 line-clamp-1` // prettier-ignore
 
