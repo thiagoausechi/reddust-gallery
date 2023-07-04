@@ -16,7 +16,6 @@ export default function FeatureCard({
 }: Feature) {
   return (
     <Wrapper>
-      {/* TODO: Not implemented yet resulting in a 404 page. */}
       <LinkWrapper href={`/feature/${slug}`}>
         <GuiPanel>
           <ThumbnailWrapper>
