@@ -21,7 +21,6 @@ const Wrapper = tw.section`
   relative
   min-h-screen
   w-full
-  snap-start
   overflow-hidden
   bg-tiles
 `

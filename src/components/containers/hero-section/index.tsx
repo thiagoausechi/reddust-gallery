@@ -23,6 +23,5 @@ const Wrapper = tw.section`
   relative
   h-screen
   w-full
-  snap-start
   overflow-hidden
 `
