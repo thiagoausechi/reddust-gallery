@@ -3,8 +3,13 @@ import SectionContent from '@/layout/section-content'
 import { getFeatures } from '@/services/hygraph'
 import tw from 'tailwind-styled-components'
 
+const inDevEnvironment = process && process.env.NODE_ENV === 'development'
+
 export default async function GalleryCardsSection() {
-  const features = await getFeatures()
+  let features = await getFeatures()
+
+  if (!inDevEnvironment)
+    features = features.filter((feature) => feature.slug !== 'debug')
 
   return (
     <Wrapper>
