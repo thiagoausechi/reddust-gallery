@@ -7,7 +7,6 @@ const SectionContent = tw.div`
   w-full
   px-6
   pt-20
-  sm:px-0
   lg:px-10
 `
 export default SectionContent
