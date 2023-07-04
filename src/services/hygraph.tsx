@@ -4,41 +4,53 @@ import { gql, request } from 'graphql-request'
 
 const hygraph = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT as string
 
+export type FeatureStatus = {
+  slug: string
+  name: string
+  badgeColor: string
+}
+
+export type FeatureCompatibility = {
+  name: string
+  slug: string
+  badgeColor: string
+}
+
+export type ModificationType = {
+  name: string
+  slug: string
+  description: string
+  iconX: number
+  iconY: number
+}
+
+export type FeatureTag = {
+  slug: string
+  name: string
+  description: string
+}
+
+export type FeatureComparison = {
+  description: string | null
+  title: string | null
+}
+
+export type Credit = {
+  author: string
+  link: string
+  source: string
+}
+
 export type Feature = {
   name: string
   description: string
   slug: string
-  featureStatus: {
-    slug: string
-    name: string
-    badgeColor: string
-  }
-  compatibility: {
-    name: string
-    slug: string
-    badgeColor: string
-  }
-  modificationType: {
-    name: string
-    slug: string
-    description: string
-    iconX: number
-    iconY: number
-  }
-  tags: {
-    slug: string
-    name: string
-    description: string
-  }[]
-  comparisons: {
-    description: string | null
-    title: string | null
-  }[]
-  credit: {
-    author: string
-    link: string
-    source: string
-  }[]
+  featureStatus: FeatureStatus
+  compatibility: FeatureCompatibility
+  modificationType: ModificationType
+  tags: FeatureTag[]
+  comparisons: FeatureComparison[]
+  credit: Credit[]
 }
 
 interface FeaturesConnection {
