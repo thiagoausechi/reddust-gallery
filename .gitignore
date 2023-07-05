@@ -14,6 +14,7 @@
 
 # production
 /build
+public/images/comparisons/debug/*
 
 # misc
 .DS_Store
