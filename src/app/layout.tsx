@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   colorScheme: 'dark',
   themeColor: '#0b0b0b',
   creator: 'Thiago Ausechi',
+  icons: {
+    shortcut: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({
