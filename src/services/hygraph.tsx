@@ -167,3 +167,23 @@ export const getFeature = async (slug: string): Promise<Feature> => {
 
   return result.feature
 }
+
+interface FeatureSlugsQuery {
+  features: { slug: string }[]
+}
+
+export const getFeaturesSlugs = async (): Promise<{ slug: string }[]> => {
+  const query: TypedDocumentNode<
+    FeatureSlugsQuery,
+    never | Record<any, never>
+  > = parse(gql`
+    query GetAllFeatures {
+      features {
+        slug
+      }
+    }
+  `)
+
+  const result = await request(hygraph, query)
+  return result.features
+}

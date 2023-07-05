@@ -1,9 +1,23 @@
 import FeatureComparisonsSection from '@/containers/feature-comparisons-section'
 import FeaturePageCredits from '@/containers/feature-page-credits'
 import FeaturePageHeader from '@/containers/feature-page-header'
-import { getFeature } from '@/services/hygraph'
+import { getFeature, getFeaturesSlugs } from '@/services/hygraph'
 import { notFound } from 'next/navigation'
 import tw from 'tailwind-styled-components'
+
+/**
+ * Rout Segment Config
+ * @link https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+ */
+export const dynamic = 'error'
+export const dynamicParams = false
+export const revalidate = false
+
+export async function generateStaticParams() {
+  const slugs = await getFeaturesSlugs()
+
+  return slugs
+}
 
 interface Props {
   params: { slug: string }
