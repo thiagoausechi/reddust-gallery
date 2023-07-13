@@ -28,17 +28,20 @@ export const metadata: Metadata = {
   themeColor: '#0b0b0b',
   creator: 'Thiago Ausechi',
   icons: {
-    shortcut: '/favicon.ico',
+    icon: '/favicon.ico',
+    shortcut: '/favicon-180x180.png',
+    apple: '/apple-touch-icon.png',
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en'>
+      <head />
       <body>
         <ApolloWrapper>
           <Header />
