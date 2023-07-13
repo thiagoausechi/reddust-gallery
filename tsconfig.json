@@ -23,7 +23,8 @@
       "@/containers/*": ["./src/components/containers/*"       ],
       "@/hooks/*":      ["./src/components/hooks/*"            ],
       "@/layout/*":     ["./src/components/layout/*"           ],
-      "@/apollo":       ["./src/services/graphql/apollo/client"]
+      "@/apollo":       ["./src/services/graphql/apollo/client"],
+      "@/cms":          ["./src/services/graphql/cms/generated"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
