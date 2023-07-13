@@ -1,19 +1,14 @@
 'use client'
 import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import tw from 'tailwind-styled-components'
 import LogoImage from '/public/images/gallery_logo.png'
 
 export default function Header() {
-  const router = useRouter()
-  const path = usePathname()
-
   const [scrolled, setScrolled] = useState(false)
 
   const handleScroll = () => setScrolled(window.scrollY > 0)
-  const handleLogoClick = () =>
-    path === '/' ? router.push('/') : router.back()
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -22,7 +17,7 @@ export default function Header() {
 
   return (
     <Wrapper data-scrolled={scrolled}>
-      <Logo data-scrolled={scrolled} onClick={handleLogoClick}>
+      <Logo data-scrolled={scrolled} href={'/'}>
         <Image
           src={LogoImage}
           className='transition-all'
@@ -55,7 +50,7 @@ const Wrapper = tw.header`
 `
 
 // prettier-ignore
-const Logo = tw.div`
+const Logo = tw(Link)`
   absolute
   left-1/2
   -translate-x-1/2
