@@ -17,11 +17,14 @@ export const ModificationLabel   = tw.p`ml-2 text-neutral-50 line-clamp-1` // pr
 export const Badge               = tw.span<{ color?: string }>` absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg px-3 py-2 text-sm font-medium text-white ${(p) => `bg-${p.color}` || 'bg-red-500'}` // prettier-ignore
 
 type IconPosition = {
-  x: number
-  y: number
+  iconX: number
+  iconY: number
 }
 
-export const getIconPosition = ({ x, y }: IconPosition): CSSProperties => ({
-  backgroundPosition: `-${x * 32}px -${y * 32}px`,
+export const getIconPosition = ({
+  iconX,
+  iconY,
+}: IconPosition): CSSProperties => ({
+  backgroundPosition: `-${iconX * 32}px -${iconY * 32}px`,
   imageRendering: 'pixelated',
 })
