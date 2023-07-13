@@ -23,6 +23,7 @@ export default function Badge({ label, icon, className }: Props) {
 
 const Wrapper = tw.div`
   flex
+  h-full
   w-fit
   select-none
   items-center
