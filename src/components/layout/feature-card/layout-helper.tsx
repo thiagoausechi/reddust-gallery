@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ComponentProps } from 'react'
 import tw from 'tailwind-styled-components'
 
 export const ThumbnailImage      = tw.div`transition-transform duration-500 transform ease-in-out hover:scale-110 w-full` // prettier-ignore
@@ -15,7 +15,7 @@ export const ModificationWrapper = tw.footer`relative mt-8 flex w-fit items-cent
 export const ModificationIcon    = tw.div`w-8 h-8 inline-block align-text-top bg-no-repeat bg-[url("/images/modifications_sprite.png")]` // prettier-ignore
 export const ModificationLabel   = tw.p`ml-2 text-neutral-50 line-clamp-1` // prettier-ignore
 
-export const Badge               = tw.span<{ color?: string }>` absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg px-3 py-2 text-sm font-medium text-white ${(p) => `bg-${p.color}` || 'bg-red-500'}` // prettier-ignore
+export const Badge               = tw.span` absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg px-3 py-2 text-sm font-medium text-white bg-neutral-500 hover:bg-neutral-400` // prettier-ignore
 
 type IconPosition = {
   iconX: number
@@ -29,3 +29,17 @@ export const getIconPosition = ({
   backgroundPosition: `-${iconX * 32}px -${iconY * 32}px`,
   imageRendering: 'pixelated',
 })
+
+export const BadgesColors: Record<string, ComponentProps<'div'>['className']> =
+  {
+    DEFAULT: 'bg-neutral-500 hover:bg-neutral-400',
+
+    // Compatibility
+    vanilla: 'bg-green-500 hover:bg-green-400',
+    optifine: 'bg-yellow-500 hover:bg-yellow-300',
+
+    //Status
+    implemented: 'bg-green-500 hover:bg-green-400',
+    planned: 'bg-neutral-500 hover:bg-neutral-400',
+    deprecated: 'bg-red-500 hover:bg-red-400',
+  }

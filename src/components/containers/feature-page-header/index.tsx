@@ -7,6 +7,7 @@ import {
 } from '@/cms'
 import { getFragmentData } from '@/graphql'
 import Badge from '@/layout/badge'
+import { BadgesColors } from '@/layout/feature-card/layout-helper'
 import { asLink } from '@/layout/feature-card/utils'
 import SectionContent from '@/layout/section-content'
 import Link from 'next/link'
@@ -35,7 +36,7 @@ export default function FeaturePageHeader({ feature }: Props) {
               <Link href={`/${featureStatus.slug}`}>
                 <Badge
                   label={featureStatus.name}
-                  className='bg-red-500 hover:bg-red-400'
+                  className={BadgesColors[featureStatus.slug]}
                 />
               </Link>
             )}

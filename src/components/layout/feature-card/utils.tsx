@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {
   Badge,
+  BadgesColors,
   DescriptionLabel,
   DetailsWrapper,
   ModificationIcon,
@@ -35,11 +36,15 @@ export const renderFlag = (
 ) =>
   status === 'implemented' ? (
     <Link href={asLink(compatibility.slug, 'compatibility')}>
-      <Badge color={compatibility.badgeColor}>{compatibility.name}</Badge>
+      <Badge className={BadgesColors[compatibility.slug]}>
+        {compatibility.name}
+      </Badge>
     </Link>
   ) : (
     <Link href={`/${featureStatus.slug}`}>
-      <Badge color={featureStatus.badgeColor}>{featureStatus.name}</Badge>
+      <Badge className={BadgesColors[featureStatus.slug]}>
+        {featureStatus.name}
+      </Badge>
     </Link>
   )
 
