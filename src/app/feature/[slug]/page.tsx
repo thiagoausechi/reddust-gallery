@@ -1,7 +1,15 @@
+import { getClient } from '@/apollo'
+import {
+  FeatureComparisonsFragmentDoc,
+  FeatureCreditsFragmentDoc,
+  FeatureSummaryFragmentDoc,
+  GetAllFeaturesSlugsDocument,
+  GetFeatureDocument,
+} from '@/cms'
 import FeatureComparisonsSection from '@/containers/feature-comparisons-section'
 import FeaturePageCredits from '@/containers/feature-page-credits'
 import FeaturePageHeader from '@/containers/feature-page-header'
-import { getFeature, getFeaturesSlugs } from '@/services/hygraph'
+import { getFragmentData } from '@/graphql'
 import { notFound } from 'next/navigation'
 import tw from 'tailwind-styled-components'
 
@@ -14,9 +22,11 @@ export const dynamicParams = false
 export const revalidate = false
 
 export async function generateStaticParams() {
-  const slugs = await getFeaturesSlugs()
+  const { data } = await getClient().query({
+    query: GetAllFeaturesSlugsDocument,
+  })
 
-  return slugs
+  return data.features.map((slug) => slug)
 }
 
 interface Props {
@@ -24,11 +34,19 @@ interface Props {
 }
 
 export default async function FeaturePage({ params: { slug } }: Props) {
-  const feature = await getFeature(slug)
-  if (!feature) return notFound()
+  const { data } = await getClient().query({
+    query: GetFeatureDocument,
+    variables: { slug },
+  })
 
-  const { name, comparisons, credit } = feature
-  const hasCredit = credit.length > 0
+  if (!data || !data.feature) return notFound()
+
+  const feature = getFragmentData(FeatureSummaryFragmentDoc, data.feature)
+
+  const { name }        = feature // prettier-ignore
+  const { comparisons } = getFragmentData(FeatureComparisonsFragmentDoc, feature) // prettier-ignore
+  const { credit }      = getFragmentData(FeatureCreditsFragmentDoc, feature) // prettier-ignore
+  const hasCredit       = credit.length > 0 // prettier-ignore
 
   return (
     <Wrapper>
@@ -39,7 +57,7 @@ export default async function FeaturePage({ params: { slug } }: Props) {
           slug={slug}
           comparisons={comparisons}
         />
-        {hasCredit && <FeaturePageCredits credits={credit} />}
+        {hasCredit && <FeaturePageCredits credit={credit} />}
       </Content>
     </Wrapper>
   )

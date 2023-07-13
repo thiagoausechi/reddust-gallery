@@ -1,20 +1,25 @@
+import { getClient } from '@/apollo'
+import { FeatureSummaryFragmentDoc, GetAllFeaturesDocument } from '@/cms'
+import { getFragmentData } from '@/graphql'
 import FeatureCard from '@/layout/feature-card'
 import SectionContent from '@/layout/section-content'
-import { getFeatures } from '@/services/hygraph'
 import tw from 'tailwind-styled-components'
 
 const inDevEnvironment = process && process.env.NODE_ENV === 'development'
 
 export default async function GalleryCardsSection() {
-  let features = await getFeatures()
+  const { data } = await getClient().query({ query: GetAllFeaturesDocument })
+  let filtered = data?.features.map((feature) =>
+    getFragmentData(FeatureSummaryFragmentDoc, feature),
+  )
 
   if (!inDevEnvironment)
-    features = features.filter((feature) => feature.slug !== 'debug')
+    filtered = filtered.filter((feature) => feature.slug !== 'debug')
 
   return (
     <Wrapper>
       <CardsList>
-        {features.map((feature) => (
+        {filtered.map((feature) => (
           <FeatureCard key={feature.slug} {...feature} />
         ))}
       </CardsList>

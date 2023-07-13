@@ -1,12 +1,11 @@
+import { FeatureComparisonsFragment } from '@/cms'
 import SectionContent from '@/layout/section-content'
-import type { FeatureComparison } from '@/services/hygraph'
 import tw from 'tailwind-styled-components'
 import Comparison from './comparison'
 
-interface Props {
+interface Props extends FeatureComparisonsFragment {
   featureName: string
   slug: string
-  comparisons: FeatureComparison[]
 }
 
 export default function FeatureComparisonsSection({

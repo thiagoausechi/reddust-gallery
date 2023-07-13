@@ -20,12 +20,13 @@
       }
     ],
     "paths": {
-      "@/containers/*": ["./src/components/containers/*"       ],
-      "@/hooks/*":      ["./src/components/hooks/*"            ],
-      "@/layout/*":     ["./src/components/layout/*"           ],
-      "@/utils/*":      ["./src/components/utils/*"            ],
-      "@/apollo":       ["./src/services/graphql/apollo/client"],
-      "@/cms":          ["./src/services/graphql/cms/generated"]
+      "@/containers/*": ["./src/components/containers/*"               ],
+      "@/hooks/*":      ["./src/components/hooks/*"                    ],
+      "@/layout/*":     ["./src/components/layout/*"                   ],
+      "@/utils/*":      ["./src/components/utils/*"                    ],
+      "@/apollo":       ["./src/services/graphql/apollo/client"        ],
+      "@/graphql":      ["./src/services/graphql/cms/generated"        ],
+      "@/cms":          ["./src/services/graphql/cms/generated/graphql"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

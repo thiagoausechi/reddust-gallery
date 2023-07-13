@@ -1,21 +1,17 @@
+import { FeatureCreditsFragment } from '@/cms'
 import GuiPanel from '@/layout/gui-panel'
 import SectionContent from '@/layout/section-content'
-import { Credit } from '@/services/hygraph'
 import Link from 'next/link'
 import tw from 'tailwind-styled-components'
 
-interface Props {
-  credits: Credit[]
-}
-
-export default function FeaturePageCredits({ credits }: Props) {
+export default function FeaturePageCredits({ credit }: FeatureCreditsFragment) {
   return (
     <Wrapper>
       <Title>Credits</Title>
       <GuiPanel>
         <Content>
-          {credits.map(({ source, author, link }, i) => (
-            <Credit key={i}>
+          {credit.map(({ source, author, link }) => (
+            <Credit key={link}>
               <Source href={link} target='_blank'>
                 {source}
               </Source>

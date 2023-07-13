@@ -1,13 +1,15 @@
 'use client'
-import { FeatureComparison } from '@/services/hygraph'
 import Image from 'next/image'
 import { ReactCompareSlider } from 'react-compare-slider'
 import tw from 'tailwind-styled-components'
 
-interface Props extends FeatureComparison {
+interface Props {
   featureName: string
   slug: string
   index: number
+
+  description?: string | null | undefined
+  title?: string | null | undefined
 }
 
 export default function Comparison({

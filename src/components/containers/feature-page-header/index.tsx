@@ -1,28 +1,34 @@
+import {
+  CompatibilityFragmentDoc,
+  FeatureStatusFragmentDoc,
+  FeatureSummaryFragment,
+  ModificationTypeFragmentDoc,
+  TagsFragmentDoc,
+} from '@/cms'
+import { getFragmentData } from '@/graphql'
 import Badge from '@/layout/badge'
 import SectionContent from '@/layout/section-content'
-import type { Feature } from '@/services/hygraph'
 import tw from 'tailwind-styled-components'
 
 interface Props {
-  feature: Feature
+  feature: FeatureSummaryFragment
 }
 
 export default function FeaturePageHeader({ feature }: Props) {
-  const {
-    name,
-    description,
-    featureStatus,
-    compatibility,
-    modificationType,
-    tags,
-  } = feature
+  const { name, description } = feature
+  const { featureStatus     } = getFragmentData(FeatureStatusFragmentDoc, feature) // prettier-ignore
+  const { compatibility     } = getFragmentData(CompatibilityFragmentDoc, feature) // prettier-ignore
+  const { modificationType  } = getFragmentData(ModificationTypeFragmentDoc, feature) // prettier-ignore
+  const { tags              } = getFragmentData(TagsFragmentDoc, feature) // prettier-ignore
+
+  if (!modificationType || !compatibility) return null
 
   return (
     <Wrapper>
       <Content>
-        <SectionContent className='mt-0 pt-0 flex flex-col gap-4'>
+        <SectionContent className='flex flex-col gap-4 pt-0 mt-0'>
           <BadgesList>
-            {featureStatus.name !== 'Deprecated' ? null : (
+            {featureStatus?.name !== 'Deprecated' ? null : (
               <Badge
                 label={featureStatus.name}
                 className='bg-red-500 hover:bg-red-400'

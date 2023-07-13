@@ -1,4 +1,11 @@
-import { Feature } from '@/services/hygraph'
+import {
+  CompatibilityFragmentDoc,
+  FeatureStatusFragmentDoc,
+  FeatureSummaryFragment,
+  ModificationTypeFragmentDoc,
+  TagsFragmentDoc,
+} from '@/cms'
+import { getFragmentData } from '@/graphql'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { CSSProperties } from 'react'
@@ -9,11 +16,14 @@ export default function FeatureCard({
   name,
   description,
   slug,
-  featureStatus,
-  compatibility,
-  modificationType,
-  tags,
-}: Feature) {
+  ...res
+}: FeatureSummaryFragment) {
+  const { featureStatus }    = getFragmentData(FeatureStatusFragmentDoc, res) // prettier-ignore
+  const { compatibility }    = getFragmentData(CompatibilityFragmentDoc, res) // prettier-ignore
+  const { modificationType } = getFragmentData(ModificationTypeFragmentDoc, res) // prettier-ignore
+  const { tags }             = getFragmentData(TagsFragmentDoc, res) // prettier-ignore
+
+  // TODO: Refactor to Components Compound
   return (
     <Wrapper>
       <LinkWrapper href={`/feature/${slug}`}>
@@ -36,13 +46,13 @@ export default function FeatureCard({
               </TagsContent>
             </TagsWrapper>
 
-            {featureStatus.slug === 'implemented' ? (
-              <Badge color={compatibility.badgeColor}>
-                {compatibility.name}
+            {featureStatus?.slug === 'implemented' ? (
+              <Badge color={compatibility?.badgeColor}>
+                {compatibility?.name}
               </Badge>
             ) : (
-              <Badge color={featureStatus.badgeColor}>
-                {featureStatus.name}
+              <Badge color={featureStatus?.badgeColor}>
+                {featureStatus?.name}
               </Badge>
             )}
           </ThumbnailWrapper>
@@ -53,8 +63,13 @@ export default function FeatureCard({
           </div>
 
           <ModificationWrapper>
-            <ModificationIcon style={getIconPosition(modificationType)} />
-            <ModificationLabel>{modificationType.name}</ModificationLabel>
+            <ModificationIcon
+              style={getIconPosition({
+                x: modificationType?.iconX || 0,
+                y: modificationType?.iconY || 0,
+              })}
+            />
+            <ModificationLabel>{modificationType?.name}</ModificationLabel>
           </ModificationWrapper>
         </GuiPanel>
       </LinkWrapper>
@@ -62,6 +77,7 @@ export default function FeatureCard({
   )
 }
 
+// TODO: Clean up/Refactor
 const Wrapper             = tw.article`relative mx-auto w-full` // prettier-ignore
 const LinkWrapper         = tw(Link)`relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full` // prettier-ignore
 
@@ -81,13 +97,12 @@ const ModificationLabel   = tw.p`ml-2 text-neutral-50 line-clamp-1` // prettier-
 
 const Badge               = tw.span<{ color?: string }>` absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg px-3 py-2 text-sm font-medium text-white ${(p) => `bg-${p.color}` || 'bg-red-500'}` // prettier-ignore
 
-const getIconPosition = ({
-  iconX,
-  iconY,
-}: {
-  iconX: number
-  iconY: number
-}): CSSProperties => ({
-  backgroundPosition: `-${iconX * 32}px -${iconY * 32}px`,
+type IconPosition = {
+  x: number
+  y: number
+}
+
+const getIconPosition = ({ x, y }: IconPosition): CSSProperties => ({
+  backgroundPosition: `-${x * 32}px -${y * 32}px`,
   imageRendering: 'pixelated',
 })
