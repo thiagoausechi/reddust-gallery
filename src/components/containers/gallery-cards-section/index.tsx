@@ -3,23 +3,26 @@ import { FeatureSummaryFragmentDoc, GetAllFeaturesDocument } from '@/cms'
 import { getFragmentData } from '@/graphql'
 import FeatureCard from '@/layout/feature-card/template-full'
 import SectionContent from '@/layout/section-content'
+import { filterSlugs } from '@/lib/utils'
 import tw from 'tailwind-styled-components'
 
-const inDevEnvironment = process && process.env.NODE_ENV === 'development'
-
 export default async function GalleryCardsSection() {
-  const { data } = await getClient().query({ query: GetAllFeaturesDocument })
-  let filtered = data?.features.map((feature) =>
+  const { data } = await getClient().query({
+    query: GetAllFeaturesDocument,
+    variables: {
+      filterArray: filterSlugs([]),
+    },
+  })
+
+  if (!data) return null
+  let mapped = data.features.map((feature) =>
     getFragmentData(FeatureSummaryFragmentDoc, feature),
   )
-
-  if (!inDevEnvironment)
-    filtered = filtered.filter((feature) => feature.slug !== 'debug')
 
   return (
     <Wrapper>
       <CardsList>
-        {filtered.map((feature) => (
+        {mapped.map((feature) => (
           <FeatureCard key={feature.slug} {...feature} />
         ))}
       </CardsList>

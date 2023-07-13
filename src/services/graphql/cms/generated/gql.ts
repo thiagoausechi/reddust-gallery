@@ -14,7 +14,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 const documents = {
     "fragment FeatureSummary on Feature {\n  id\n  slug\n  name\n  description\n  ...FeatureStatus\n  ...Compatibility\n  ...ModificationType\n  ...Tags\n  ...FeatureComparisons\n  ...FeatureCredits\n}\n\nfragment FeatureStatus on Feature {\n  featureStatus {\n    slug\n    name\n    badgeColor\n  }\n}\n\nfragment Compatibility on Feature {\n  compatibility {\n    name\n    slug\n    badgeColor\n  }\n}\n\nfragment ModificationType on Feature {\n  modificationType {\n    name\n    slug\n    description\n    iconX\n    iconY\n  }\n}\n\nfragment Tags on Feature {\n  tags {\n    slug\n    name\n    description\n  }\n}\n\nfragment FeatureComparisons on Feature {\n  comparisons {\n    description\n    title\n  }\n}\n\nfragment FeatureCredits on Feature {\n  credit {\n    author\n    link\n    source\n  }\n}": types.FeatureSummaryFragmentDoc,
-    "query getAllFeatures {\n  features {\n    ...FeatureSummary\n  }\n}\n\nquery getFeature($slug: String!) {\n  feature(where: {slug: $slug}) {\n    ...FeatureSummary\n  }\n}\n\nquery getAllFeaturesSlugs {\n  features {\n    slug\n  }\n}": types.GetAllFeaturesDocument,
+    "query getAllFeatures($filterArray: [String]) {\n  features(where: {slug_not_in: $filterArray}) {\n    ...FeatureSummary\n  }\n}\n\nquery getFeature($slug: String!) {\n  feature(where: {slug: $slug}) {\n    ...FeatureSummary\n  }\n}\n\nquery getAllFeaturesSlugs($filterArray: [String]) {\n  features(where: {slug_not_in: $filterArray}) {\n    slug\n  }\n}": types.GetAllFeaturesDocument,
 };
 
 /**
@@ -38,7 +38,7 @@ export function graphql(source: "fragment FeatureSummary on Feature {\n  id\n  s
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query getAllFeatures {\n  features {\n    ...FeatureSummary\n  }\n}\n\nquery getFeature($slug: String!) {\n  feature(where: {slug: $slug}) {\n    ...FeatureSummary\n  }\n}\n\nquery getAllFeaturesSlugs {\n  features {\n    slug\n  }\n}"): (typeof documents)["query getAllFeatures {\n  features {\n    ...FeatureSummary\n  }\n}\n\nquery getFeature($slug: String!) {\n  feature(where: {slug: $slug}) {\n    ...FeatureSummary\n  }\n}\n\nquery getAllFeaturesSlugs {\n  features {\n    slug\n  }\n}"];
+export function graphql(source: "query getAllFeatures($filterArray: [String]) {\n  features(where: {slug_not_in: $filterArray}) {\n    ...FeatureSummary\n  }\n}\n\nquery getFeature($slug: String!) {\n  feature(where: {slug: $slug}) {\n    ...FeatureSummary\n  }\n}\n\nquery getAllFeaturesSlugs($filterArray: [String]) {\n  features(where: {slug_not_in: $filterArray}) {\n    slug\n  }\n}"): (typeof documents)["query getAllFeatures($filterArray: [String]) {\n  features(where: {slug_not_in: $filterArray}) {\n    ...FeatureSummary\n  }\n}\n\nquery getFeature($slug: String!) {\n  feature(where: {slug: $slug}) {\n    ...FeatureSummary\n  }\n}\n\nquery getAllFeaturesSlugs($filterArray: [String]) {\n  features(where: {slug_not_in: $filterArray}) {\n    slug\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

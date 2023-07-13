@@ -10,6 +10,7 @@ import FeatureComparisonsSection from '@/containers/feature-comparisons-section'
 import FeaturePageCredits from '@/containers/feature-page-credits'
 import FeaturePageHeader from '@/containers/feature-page-header'
 import { getFragmentData } from '@/graphql'
+import { filterSlugs } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 import tw from 'tailwind-styled-components'
 
@@ -24,6 +25,9 @@ export const revalidate = false
 export async function generateStaticParams() {
   const { data } = await getClient().query({
     query: GetAllFeaturesSlugsDocument,
+    variables: {
+      filterArray: filterSlugs([]),
+    },
   })
 
   return data.features.map((slug) => slug)

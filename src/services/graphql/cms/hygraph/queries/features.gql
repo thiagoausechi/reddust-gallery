@@ -1,5 +1,5 @@
-query getAllFeatures {
-  features {
+query getAllFeatures($filterArray: [String]) {
+  features(where: { slug_not_in: $filterArray }) {
     ...FeatureSummary
   }
 }
@@ -10,8 +10,8 @@ query getFeature($slug: String!) {
   }
 }
 
-query getAllFeaturesSlugs {
-  features {
+query getAllFeaturesSlugs($filterArray: [String]) {
+  features(where: { slug_not_in: $filterArray }) {
     slug
   }
 }

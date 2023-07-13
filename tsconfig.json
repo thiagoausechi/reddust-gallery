@@ -24,6 +24,7 @@
       "@/hooks/*":      ["./src/components/hooks/*"                    ],
       "@/layout/*":     ["./src/components/layout/*"                   ],
       "@/utils/*":      ["./src/components/utils/*"                    ],
+      "@/lib/*":        ["./src/lib/*"                                 ],
       "@/apollo":       ["./src/services/graphql/apollo/client"        ],
       "@/graphql":      ["./src/services/graphql/cms/generated"        ],
       "@/cms":          ["./src/services/graphql/cms/generated/graphql"]
