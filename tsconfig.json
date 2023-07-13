@@ -23,6 +23,7 @@
       "@/containers/*": ["./src/components/containers/*"       ],
       "@/hooks/*":      ["./src/components/hooks/*"            ],
       "@/layout/*":     ["./src/components/layout/*"           ],
+      "@/utils/*":      ["./src/components/utils/*"            ],
       "@/apollo":       ["./src/services/graphql/apollo/client"],
       "@/cms":          ["./src/services/graphql/cms/generated"]
     }

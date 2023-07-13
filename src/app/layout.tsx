@@ -1,4 +1,5 @@
 import Header from '@/layout/header'
+import { ApolloWrapper } from '@/utils/apollo-wrapper'
 import { Metadata } from 'next'
 import './globals.css'
 
@@ -39,8 +40,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <Header />
-        {children}
+        <ApolloWrapper>
+          <Header />
+          {children}
+        </ApolloWrapper>
       </body>
     </html>
   )
