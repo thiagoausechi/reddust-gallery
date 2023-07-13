@@ -1,13 +1,11 @@
 import tw from 'tailwind-styled-components'
 
-export default function GuiPanel({ children }: React.PropsWithChildren) {
-  return <Wrapper>{children}</Wrapper>
-}
-
-const Wrapper = tw.div`
-  bg-gui-500
+const GuiPanel = tw.div`
   h-fit
   w-full
+  bg-gui-500
   p-3
   shadow-gui
 `
+
+export default GuiPanel
