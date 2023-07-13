@@ -1,0 +1,64 @@
+fragment FeatureSummary on Feature {
+  id
+  slug
+  name
+  description
+
+  ...FeatureStatus
+  ...Compatibility
+  ...ModificationType
+  ...Tags
+
+  ...FeatureComparisons
+
+  ...FeatureCredits
+}
+
+fragment FeatureStatus on Feature {
+  featureStatus {
+    slug
+    name
+    badgeColor
+  }
+}
+
+fragment Compatibility on Feature {
+  compatibility {
+    name
+    slug
+    badgeColor
+  }
+}
+
+fragment ModificationType on Feature {
+  modificationType {
+    name
+    slug
+    description
+    iconX
+    iconY
+  }
+}
+
+fragment Tags on Feature {
+  tags {
+    slug
+    name
+    description
+  }
+}
+
+fragment FeatureComparisons on Feature {
+  comparisons {
+    description
+    title
+  }
+}
+
+fragment FeatureCredits on Feature {
+  credit {
+    author
+    link
+    source
+  }
+}

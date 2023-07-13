@@ -1,0 +1,17 @@
+query getAllFeatures {
+  features {
+    ...FeatureSummary
+  }
+}
+
+query getFeature($slug: String!) {
+  feature(where: { slug: $slug }) {
+    ...FeatureSummary
+  }
+}
+
+query getAllFeaturesSlugs {
+  features {
+    slug
+  }
+}
