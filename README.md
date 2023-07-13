@@ -21,4 +21,4 @@ You will find a curated collection of screenshots, images, and descriptions that
 <br>
 
 <p align='center'>Tech stack used in this project:</p>
-<p align='center'><img src="https://skillicons.dev/icons?i=nextjs,react,ts,graphql,tailwind" alt="Principais tecnologias e ferramentas"></p>
+<p align='center'><img src="https://skillicons.dev/icons?i=nextjs,react,ts,apollo,graphql,tailwind" alt="Principais tecnologias e ferramentas"></p>
