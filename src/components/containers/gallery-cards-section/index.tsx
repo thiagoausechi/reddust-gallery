@@ -1,7 +1,7 @@
 import { getClient } from '@/apollo'
 import { FeatureSummaryFragmentDoc, GetAllFeaturesDocument } from '@/cms'
 import { getFragmentData } from '@/graphql'
-import FeatureCard from '@/layout/feature-card/full-template'
+import FeatureCard from '@/layout/feature-card/template-full'
 import SectionContent from '@/layout/section-content'
 import tw from 'tailwind-styled-components'
 
