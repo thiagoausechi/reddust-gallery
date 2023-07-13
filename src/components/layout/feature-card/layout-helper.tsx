@@ -7,6 +7,7 @@ export const TagsWrapper         = tw.div`absolute flex justify-center bottom-0 
 export const TagsContent         = tw.div`flex bg-gui-500 white px-4 py-1 space-x-5 rounded-lg overflow-hidden` // prettier-ignore
 export const Tag                 = tw.p`flex items-center font-medium text-neutral-50` // prettier-ignore
 
+export const DetailsWrapper      = tw.div`mt-4` // prettier-ignore
 export const NameLabel           = tw.h2`font-medium text-base md:text-lg text-neutral-50 line-clamp-1` // prettier-ignore
 export const DescriptionLabel    = tw.h2`mt-2 text-sm text-neutral-50 line-clamp-1` // prettier-ignore
 

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import {
   Badge,
   DescriptionLabel,
+  DetailsWrapper,
   ModificationIcon,
   ModificationLabel,
   ModificationWrapper,
@@ -53,10 +54,10 @@ export const renderTags = (tags: Tags) => (
 )
 
 export const renderDetails = (name: string, description: string) => (
-  <div className='mt-4'>
+  <DetailsWrapper>
     <NameLabel>{name}</NameLabel>
     <DescriptionLabel>{description}</DescriptionLabel>
-  </div>
+  </DetailsWrapper>
 )
 
 export const renderFooter = ({ slug, name, iconX, iconY }: Modification) => (
