@@ -7,7 +7,9 @@ import {
 } from '@/cms'
 import { getFragmentData } from '@/graphql'
 import Badge from '@/layout/badge'
+import { asLink } from '@/layout/feature-card/utils'
 import SectionContent from '@/layout/section-content'
+import Link from 'next/link'
 import tw from 'tailwind-styled-components'
 
 interface Props {
@@ -30,25 +32,34 @@ export default function FeaturePageHeader({ feature }: Props) {
         <SectionContent className='flex flex-col gap-4 pt-0 mt-0'>
           <BadgesList>
             {featureStatus.name !== 'Deprecated' ? null : (
-              <Badge
-                label={featureStatus.name}
-                className='bg-red-500 hover:bg-red-400'
-              />
+              <Link href={`/${featureStatus.slug}`}>
+                <Badge
+                  label={featureStatus.name}
+                  className='bg-red-500 hover:bg-red-400'
+                />
+              </Link>
             )}
-            <Badge
-              label={modificationType.name}
-              icon={{
-                iconX: modificationType.iconX,
-                iconY: modificationType.iconY,
-              }}
-            />
-            <Badge label={compatibility.name} />
+            <Link href={asLink(modificationType.slug!, 'modification')}>
+              <Badge
+                label={modificationType.name}
+                icon={{
+                  iconX: modificationType.iconX,
+                  iconY: modificationType.iconY,
+                }}
+              />
+            </Link>
+
+            <Link href={asLink(compatibility.slug, 'compatibility')}>
+              <Badge label={compatibility.name} />
+            </Link>
           </BadgesList>
           <Title>{name}</Title>
           <Subtitle>{description}</Subtitle>
           <TagsList>
             {tags.map(({ slug, name }) => (
-              <Tag key={slug}>{name}</Tag>
+              <Link href={`/tag/${slug}`} key={slug}>
+                <Tag>{name}</Tag>
+              </Link>
             ))}
           </TagsList>
         </SectionContent>
