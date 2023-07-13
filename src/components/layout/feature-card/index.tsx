@@ -23,22 +23,26 @@ export default function CardBuilder({
   return (
     <Wrapper>
       <LinkWrapper href={link}>
-        <GuiPanel>
-          <ThumbnailWrapper>
-            {thumbnail}
-            {tags}
-            {flag}
-          </ThumbnailWrapper>
+        <Content>
+          <div>
+            <ThumbnailWrapper>
+              {thumbnail}
+              {tags}
+              {flag}
+            </ThumbnailWrapper>
 
-          {details}
+            {details}
+          </div>
+
           {footer}
-        </GuiPanel>
+        </Content>
       </LinkWrapper>
     </Wrapper>
   )
 }
 
 const Wrapper             = tw.article`relative mx-auto w-full` // prettier-ignore
-const LinkWrapper         = tw(Link)`relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full` // prettier-ignore
+const LinkWrapper         = tw(Link)`relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full h-full` // prettier-ignore
+const Content             = tw(GuiPanel)`flex h-full flex-col justify-between` // prettier-ignore
 
 const ThumbnailWrapper    = tw.div`flex justify-center rounded-md relative overflow-hidden h-52` // prettier-ignore
