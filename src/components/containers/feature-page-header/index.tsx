@@ -21,14 +21,15 @@ export default function FeaturePageHeader({ feature }: Props) {
   const { modificationType  } = getFragmentData(ModificationTypeFragmentDoc, feature) // prettier-ignore
   const { tags              } = getFragmentData(TagsFragmentDoc, feature) // prettier-ignore
 
-  if (!modificationType || !compatibility) return null
+  if (!featureStatus || !compatibility || !modificationType || !tags)
+    return null
 
   return (
     <Wrapper>
       <Content>
         <SectionContent className='flex flex-col gap-4 pt-0 mt-0'>
           <BadgesList>
-            {featureStatus?.name !== 'Deprecated' ? null : (
+            {featureStatus.name !== 'Deprecated' ? null : (
               <Badge
                 label={featureStatus.name}
                 className='bg-red-500 hover:bg-red-400'
